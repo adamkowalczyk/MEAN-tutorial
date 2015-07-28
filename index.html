@@ -8,9 +8,9 @@
   </head>
   <!-- specify module and controller for page -->
   <body ng-app="flapperNews" ng-controller="MainCtrl">
-    <div>
-      <!-- double bound variable -->
-      {{test}}
+    <!-- 'repeat' directive -->
+    <div ng-repeat="post in posts"> 
+      {{post}}
     </div>
   </body>
 </html>
