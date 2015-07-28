@@ -20,13 +20,17 @@ function($scope){
     // prevent empty posts:
     if(!$scope.title || $scope.title === '') { return; }
     // $scope.title comes from ng-model directive in html form
-    $scope.posts.push({title: $scope.title, upvotes: 0});
-    // reset variable..
+    $scope.posts.push({
+      title: $scope.title,
+      link: $scope.link,
+      upvotes: 0});
+    // reset variables
+    $scope.link = '';
     $scope.title = '';
   };
 
   $scope.incrementUpvotes = function(post) {
     post.upvotes += 1;
   };
-  
+
 }]);
