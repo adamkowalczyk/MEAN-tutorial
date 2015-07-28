@@ -12,6 +12,7 @@
     <!-- filter after pipe -->
     <div ng-repeat="post in posts | orderBy: '-upvotes'"> 
        {{post.title}} - upvotes: {{post.upvotes}}
+       <button ng-click="addPost()">Post</button>
     </div>
   </body>
 </html>
