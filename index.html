@@ -12,7 +12,13 @@
     <!-- filter after pipe -->
     <div ng-repeat="post in posts | orderBy: '-upvotes'"> 
        {{post.title}} - upvotes: {{post.upvotes}}
-       <button ng-click="addPost()">Post</button>
+       
+       <form ng-submit="addPost()">
+        <!-- ng-model binds submitted data to $scope. ie. $scope.title -->
+        <input type="text" ng-model="title"></input>
+        <button type="submit">Post</button>
+      </form>
+
     </div>
   </body>
 </html>
