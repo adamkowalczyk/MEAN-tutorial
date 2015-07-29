@@ -1,11 +1,36 @@
 // define module:
-var app = angular.module('flapperNews', []);
+// NB ui router is not the standard angular router (ngRoute)
+var app = angular.module('flapperNews', ['ui.router']);
+
+// use config function to set up routing (ui-router)
+app.config([
+'$stateProvider',
+'$urlRouterProvider',
+function($stateProvider, $urlRouterProvider) {
+
+  $stateProvider
+    .state('home', {
+      url: '/home',
+      templateUrl: '/home.html',
+      controller: 'MainCtrl'
+    });
+
+  // 'otherwise' catches all undefined routes
+  $urlRouterProvider.otherwise('home');
+}]);
+
 
 //  define factory:
 // NB factories return an object (as opposed to services which create a constructor)
 app.factory('posts', [function(){
   var o = {
-    posts: []
+    posts: [
+      {title: 'post 1', upvotes: 5},
+      {title: 'post 2', upvotes: 2},
+      {title: 'post 3', upvotes: 15},
+      {title: 'post 4', upvotes: 9},
+      {title: 'post 5', upvotes: 4}
+    ]
   };
   return o;
 }]);
@@ -20,14 +45,6 @@ function($scope, posts){
   
   // make factory object avaialble in $scope
   $scope.posts = posts.posts;
-
-  // [
-  //   {title: 'post 1', upvotes: 5},
-  //   {title: 'post 2', upvotes: 2},
-  //   {title: 'post 3', upvotes: 15},
-  //   {title: 'post 4', upvotes: 9},
-  //   {title: 'post 5', upvotes: 4}
-  // ];
  
   $scope.addPost = function(){
     // prevent empty posts:
