@@ -77,8 +77,8 @@ function($scope, posts){
 
 app.controller('PostsCtrl', [
 '$scope',
-'$stateParams',
+'$stateParams', //ui-router: url params
 'posts',
 function($scope, $stateParams, posts){
-
+  $scope.post = posts.posts[$stateParams.id];
 }]);

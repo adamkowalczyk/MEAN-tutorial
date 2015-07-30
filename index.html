@@ -16,14 +16,16 @@
       </div>
     </div>
 
+  <!-- INLINE TEMPLATES (all your templates in one html doc :S) -->
+
+  <!-- home.html template -->
   <script type="text/ng-template" id="/home.html">
-        
         <div class="page-header">
           <h1>Flapper News</h1>
         </div>
 
 
-        <!-- 'repeat' directive -->
+        <!-- 'repeat' directive - iterates over array -->
         <!-- filter after pipe -->
         <div ng-repeat="post in posts | orderBy: '-upvotes'"> 
           <!-- upvote arrow, passes post object to increment fn -->
@@ -41,6 +43,11 @@
             <span ng-hide="post.link">
               {{post.title}}
             </span>
+            <!-- $index provided by ng-repeat directive -->
+            <span>
+              <a href="#/posts/{{$index}}">Comments</a>
+            </span>
+
           </span>
         </div>
     
@@ -62,7 +69,30 @@
         </div>
         <button type="submit" class="btn btn-primary">Post</button>
       </form>
-
     </script>
+
+    <!-- posts.html template -->
+    <script type="text/ng-template" id="/posts.html">
+      <div class="page-header">
+        <h3>
+          <a ng-show="post.link" href="{{post.link}}">
+            {{post.title}}
+          </a>
+          <span ng-hide="post.link">
+            {{post.title}}
+          </span>
+        </h3>
+      </div>
+
+      <div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
+        <span class="glyphicon glyphicon-thumbs-up"
+          ng-click="incrementUpvotes(comment)"></span>
+        {{comment.upvotes}} - by {{comment.author}}
+        <span style="font-size:20px; margin-left:10px;">
+          {{comment.body}}
+        </span>
+      </div>
+    </script>
+
   </body>
 </html>
