@@ -9,6 +9,13 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+var mongoose = require('mongoose');
+
+// require schemae
+require('./models/Posts');
+require('./models/Comments');
+// connect to local db
+mongoose.connect('mongodb://localhost/news');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
